@@ -1,0 +1,48 @@
+import React, { useState, useEffect } from "react";
+
+function StudentInfo() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const student = {
+    name: "Surya Tej",
+    course: "B.Tech - CSE",
+    email: "suryatej@example.com",
+  };
+
+  const cardStyle = {
+    display: "flex",
+    flexDirection: isMobile ? "column" : "row",
+    gap: "20px",
+    padding: "20px",
+    margin: "20px auto",
+    border: "2px solid #ccc",
+    borderRadius: "10px",
+    maxWidth: "500px",
+    fontFamily: "Arial, sans-serif",
+    backgroundColor: "#f9f9f9",
+  };
+
+  const itemStyle = {
+    background: "#fff",
+    padding: "10px",
+    borderRadius: "8px",
+    flex: 1,
+    boxShadow: "0 0 5px rgba(0,0,0,0.1)",
+  };
+
+  return (
+    <div style={cardStyle}>
+      <div style={itemStyle}><b>Name:</b> {student.name}</div>
+      <div style={itemStyle}><b>Course:</b> {student.course}</div>
+      <div style={itemStyle}><b>Email:</b> {student.email}</div>
+    </div>
+  );
+}
+
+export default StudentInfo;
